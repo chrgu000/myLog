@@ -1,0 +1,17 @@
+越南测试服务器
+地址：203.162.54.40:8095
+用户：administrator
+密码：MSDmsd123
+
+
+svn账号密码
+用户：lidehuan
+密码：lidehuan
+
+
+越南订单接口
+SVN：https://192.168.1.37/svn/Java/Frame/projects/interface/yuenan/订单接口/yuenan-ifd-platform
+
+
+越南客户APP接口
+SVN：https://192.168.1.37/svn/Java/Frame/projects/interface/yuenan/新客户app/JandT_Customer_App
