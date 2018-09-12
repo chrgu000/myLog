@@ -1,0 +1,94 @@
+procedure P_APP2_ForeignFeeStandard(
+	sSendSiteCode in 	--寄件区
+	sDestAreaCode in 	--目的区域
+	sFeeType      in 	--费用类别
+	fWeight       in 	--重量
+	sCusName     in 	--客户名称
+	sPAYMENTTYPE in 	--快件类型
+	sKey         in 	--密钥
+	p_rf         out 	sys_refcursor
+) is v_recordcount integer; --记录数
+	
+	--查TAB_CUSTOMER（条件：客户名称 和 key）的记录数
+	
+	--判断 若记录为0：
+	
+		直接查 tab_快件类型表。
+		
+	--否则 即 记录大于0：
+	
+		--判断 若 【快件类型】 sPAYMENTTYPE 不为 null：
+			
+			则查询 tab_quotedpricestandard_dtl 表，（条件有 【快件类型】 sPAYMENTTYPE），并且费用调用 xtcalscusstandard() 函数。
+			
+			/**
+			
+				函数xtcalscusstandard
+			
+			*/
+			
+		--否则 即 sPAYMENTTYPE 为null
+		
+			则查询 tab_quotedpricestandard_dtl 表，（条件无 【快件类型】 sPAYMENTTYPE），并且费用调用 xtcalscusstandard() 函数。
+			
+			/**
+			
+				函数xtcalscusstandard
+				
+			*/
+			
+			
+		
+
+		
+		
+		
+		
+function XtCalsCusStandard(
+	sSendSiteCode  	in varchar2,  	--寄件区域或客户
+	sDestAreaCode 	in varchar2, 	--目的区域
+	sFeeType      	in varchar2, 	--费用类别
+	fWeight       	in number, 		--重量
+	SProductType  	in varchar2, 	--快件类型
+	sCenter       	in varchar2, 	--中心名称
+	sSendDate     	in date 		--有效日期
+)
+
+	--判断 若【重量】 fWeight 小于等于 0：
+
+		return“不能为0”。
+
+	--判断 若【财务中心】 sCenter 不为 null
+
+		则查表 TAB_QUOTEDPRICESTANDARD_DTL 表，（带参数 【财务中心】sCenter ）
+
+		正确 k = 1; 异常 k = -1.
+	
+	--否则 即 sCenter 为 null
+		
+		则查表 TAB_QUOTEDPRICESTANDARD_DTL 表，（不带参数 【财务中心】sCenter）
+
+		正确 k = 1; 异常 k = -1.
+
+	--判断 若 k == -1:
+		
+		return '没有找到维护的报价!'。
+
+
+	-- 获取进位重量
+
+  	v_jsWeight := 调用函数 XtJw(fweight, v_JWParam, v_WeightMode);
+	
+	
+	--遍历（select * from TAB_QUOTEDPRICEFORMULASTANDARD  where QPID = v_QID）结果集：
+
+		--判断 若 WEIGHTRANGE 字段值存在 ‘W’，即存在公式：
+
+			则 将重量代入公式；
+
+			调用 xtPExpStrEval 过程计算重量，
+	
+	
+	
+	
+	

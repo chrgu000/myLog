@@ -1,0 +1,262 @@
+// 需求:
+//   1. 查询
+//        * URI: emps
+//        * 请求方式: GET
+//   2. 添加所有员工信息
+//        2.1 显示添加页面:
+//                * URI: emp
+//                * 请求方式: GET
+//        2.2 添加员工
+//                * URI: emp
+//                * 请求方式: POST
+//                * 添加完成后,重定向到 list 页面
+//   3. 删除
+//        * URI: emp/{id}
+//        * 请求方式: DELETE
+//   4. 修改操作 (其中 lastName 不可修改!!)
+//       4.1 显示修改页面
+//              * URI: emp/{id}
+//              * 请求方式: GET
+//       4.2 修改员工信息
+//              * URI: emp
+//              * 请求方式: PUT
+//              * 完成修改,重定向到 list 页面
+
+// index.jsp
+显示所有员工信息: <a href="${pageContext.request.contextPath}/emps">显示所有</a>
+
+// list.jsp (显示所有员工信息页面)
+<head>
+    <!-- 引入 jquery 脚本 -->
+    <script type="text/javascript"
+            src="${pageContext.request.contextPath}/scripts/jquery-3.2.1.min.js">
+    </script>
+    <!-- 使用表单提交 delete 请求 -->
+    <script type="text/javascript">
+        $(function(){
+            $(".deleteCss").click(function(){
+                var action = $(this).attr("href");
+                $("#deleteForm").attr("action",action).submit();
+
+                <!-- 取消 click 的默认事件 -->
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>显示所有员工</h2>
+    <c:if test="${empty requestScope.employees}">
+        it's nothing...
+    </c:if>
+    <c:if test="${not empty requestScope.employees}">
+        <table border="1" cellpadding="10" cellspacing="2">
+        <tr>
+            <td>id</td>
+            <td>lastName</id>
+            <td>email</td>
+            <td>gender</id>
+            <td>department</td>
+            <td>edit</id>
+            <td>delete</td>
+        </tr>
+        <c:forEach items="${requestScope.employees}" var="employee">
+            <tr>
+                <td>${employee.id}</td>
+                <td>${employee.lastName}</id>
+                <td>${employee.email}</td>
+                <td>${employee.gender == 1 ? 'male' : 'female'}</id>
+                <td>${employee.department.departmentName}</td>
+                <td>
+                <a href="${pageContext.request.contextPath}/emp/${employee.id}">
+                    edit</a></id>
+                <td>
+                    <a class="deleteCss"
+                    href="${pageContext.request.contextPath}/emp/${employee.id}>
+                        delete
+                    </a>
+                </td>
+            </tr>
+        </c:forEach>
+    </c:if>
+
+    添加员工: <a href="${pageContext.request.contextPath}/emp">添加</a>
+    <br/>
+
+    <!-- 需要执行RESTful风格的删除,需要使用form表单 post 提交 -->
+    <form id="deleteForm" action="" method="post">
+        <input type="hidden" name="_method" value="DELETE"/>
+    </form>
+
+
+</body>
+
+// add.jsp (添加之前的编辑页面)
+
+// 需要引入 springframework 的标签
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<body>
+<h2>添加客户</h2>
+<form:form action="${pageContext.request.contextPath}/emp" method="post"
+                                                            modelAttribute="employee">
+    lastName:<form:input path="lastName"/><br/>
+    email:<form:input path="email"/><br/>
+    gender:<form:radiobuttons path="gender" items="${requestScope.genders}"/><br/>
+    department:<form:select path="department.id" items="${requestScope.departments}"
+                    itemLabel="departmentName" itemValue="id"/></form:select><br/>
+    <input type="submit" value="保存"/>
+</form:form>
+</body>
+
+// edit.jsp (修改页面)
+<h2>修改客户</h2>
+<form:form action="${pageContext.request.contextPath}/emp" method="post"
+                                                            modelAttribute="employee">
+    <input type="hidden" name="_method" value="PUT"/><br/>
+    <form:hidden path="id"/>
+
+    email:<form:input path="email"/><br/>
+    gender:<form:radiobuttons path="gender" items="${requestScope.genders}"/><br/>
+    department:<form:select path="department.id" items="${requestScope.departments}"
+                    itemLabel="departmentName" itemValue="id"/></form:select><br/>
+    <input type="submit" value="修改"/>
+</form:form>
+</body>
+
+
+// springDispatcherServlet-servlet.xml 配置文件
+// 若将 web.xml 中 的 DispatcherServlet 请求映射配置为 "/", 则 SpringMVC 将捕获 Web 容器
+// 的所有请求,包括静态资源的请求, SpringMVC 会将它们当成一个普通请求处理,会找不到对应处理器;
+// 可以在 SpringMVC 的配置文件中配置 <mvc:default-servlet-handler/>,以解决静态资源的问题:
+//    * <mvc:default-servlet-handler/> 将在 SpringMVC 上下文中定义一个
+//    * DefaultServletHttpRequestHandler, 它会对 DispatcherServlet 的请求进行筛查,
+//    * 如果发现是没有经过映射的请求,就将该请求交由WEB应用服务器默认的 Servlet 处理,如果不是
+//    * 静态资源的请求,才由 DispatcherServlet 继续处理;
+//    一般 WEB 应用服务器默认的 Servlet 的名称都是 default, 若所使用的 WEB 服务器的默认
+//    Servlet 名称不是 default, 则需要通过 default-servlet-name 属性显示指定;
+
+<!-- 处理静态资源导入, 例如导入 jquery -->
+<mvc:default-servlet-handler/>
+<!-- 如果只有 mvc:default-servlet-handler, 注解类失效, 还需要配置 annotation-driven -->
+<mvc:annotation-driven></mvc:annotation-driven>
+
+// web.xml
+// 默认情况下,PUT和DELETE请求是无法提交表单数据的;
+// 解决方案: 在web.xml中配置spring提供的过滤器解决或者在页面中使用form表单设置
+<filter>
+    <filter-name>HttpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>HttpMethodFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+<!--
+      将POST请求转化为DELETE或者是PUT
+       要用_method指定真正的请求参数
+-->
+<filter>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+
+// EmployeeHandler.java
+
+@Controller
+public class EmployeeHander{
+
+    @Autowired
+    private EmployeeService employeeService;
+    @Autowired
+    private DepartmentService departmentService;
+
+    // 跳转进入添加员工信息页面
+    // 需要查询出性别,全部部门
+    @RequestMapping(value="/emp",method=RequestMethod.GET)
+    public String addPre(Map<String,Object> map){
+
+        // 1. 查询出全部部门
+        map.put("departments",departmentService.getDepartments());
+        // 2. 查出性别
+        map.put("genders",getGenderUtils());
+
+        // 3. 新建承载的 bean, 实现与前台 form 表单的对应
+
+        // 在进入 spring form 标签设定 binding 对象页面前,必须有一个 binding 的对象
+        // 放在 context 中,spring 才能 binding.类似struts的context statck和value stack.
+
+        // 可以在 form 表单上通过 modelAttribute 属性指定绑定的模型属性,
+        // 如果没有指定该属性, 则默认从 request 域对象中读取 command 的表单 bean.
+        // 如果bean不存在,则会引发异常.
+
+        map.put("employee", new Employee());
+
+        return "add";
+    }
+
+    // 保存员工信息
+    @RequestMapping(value="/emp",method=RequestMethod.POST)
+    public String add(Employee employee){
+        employeeService.add(employee);
+        return "redirect:/emps";
+    }
+
+    // 删除员工信息
+    @RequestMapping(value="/emp/{id}",method=RequestMethod.DELETE)
+    public String delete(@PathVariable("id") Integer id){
+        employeeService.delete(id);
+        return "redirect:/emps";
+    }
+
+    // 修改之前,跳转到修改页面
+    // lastName 不可修改
+    @RequestMapping(value="/emp/{id}",method=RequestMethod.GET)
+    public String editPre(@PathVariable("id") Integer id, Map<String,Object> map){
+        map.put("departments",departmentService.getDepartments());
+        map.put("genders",getGenderUtils());
+        map.put(employee,employeeService.get(id));
+        return "edit";
+    }
+
+    // 修改
+    @RequestMapping(value="/emp",method=RequestMethod.PUT)
+    public String update(Employee employee){
+
+        employeeService.save(employee);
+        return "redirect:/emps";
+    }
+
+    // 保证 lastName 不能修改,且值不变
+    @ModelAttribute
+    public void getEmployeeById(@RequestParam(value="id",required=false) Integer id,
+                                            Map<String,Object> map){
+        if(null != id){
+            map.put("employee",employeeService.get(id));
+        }
+    }
+
+
+    // 查询所有员工
+    @RequestMapping(value="/emps",method=RequestMethod.GET)
+    public String list(Map<String,Object> map){
+
+        map.put("employees",employeeService.findAll());
+        return "list";
+    }
+
+    // 模拟从 LOV(list of value) 数据库查询出 gender 的值
+    private Map<String, String> getGenderUtils(){
+        Map<String,String> genders = new HashMap<String,String>();
+
+        genders.put("1","male");
+        genders.put("0","female");
+
+        return genders;
+    }
+}
