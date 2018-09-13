@@ -19,3 +19,9 @@ SVN：https://192.168.1.37/svn/Java/Frame/projects/interface/yuenan/新客户app/Jan
 
 云路开发者技术文档
 http://developer.yl-scm.com:22222/yunlu-developer-document/
+
+
+印尼本地数据库
+地址：183.3.221.229:1550:orcl
+用户：yinnibendi
+密码：oracle
