@@ -1,0 +1,5 @@
+1. 忽略某个文件更新：git update-index --assume-unchanged 文件名
+eg:git update-index --assume-unchanged hplus/hplus.common/.classpath
+
+
+
