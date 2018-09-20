@@ -1,0 +1,10 @@
+1. 备份旧项目
+	www\项目名称\下的wwwroot备份至www\项目名称\project_bak,备份后的名称加时间和版本
+
+2. 若改了Java代码替换www\项目名称\wwwroot\WEB-INF\lib下的相应jar包
+
+
+3. 若改了web代码，则替换www\项目名称\wwwroot\WEB-INF\classes\ 里的代码或文件
+
+
+4. 若想还原上一版本，则删除www\项目名称\wwwroot\下的文件，复制www\项目名称\project_bak里相应版本的文件

@@ -25,3 +25,9 @@ http://developer.yl-scm.com:22222/yunlu-developer-document/
 地址：183.3.221.229:1550:orcl
 用户：yinnibendi
 密码：oracle
+
+
+云路标准库
+地址：80
+用户：ylpt
+密码：ylpt_oracle_new
