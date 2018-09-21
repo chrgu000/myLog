@@ -31,3 +31,6 @@ http://developer.yl-scm.com:22222/yunlu-developer-document/
 地址：80
 用户：ylpt
 密码：ylpt_oracle_new
+
+
+越南测试环境远程桌面
