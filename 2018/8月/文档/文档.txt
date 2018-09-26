@@ -1,4 +1,4 @@
-越南测试服务器
+越南测试服务器(越南测试环境远程桌面)
 地址：203.162.54.40:8095
 用户：administrator
 密码：MSDmsd123
@@ -33,4 +33,11 @@ http://developer.yl-scm.com:22222/yunlu-developer-document/
 密码：ylpt_oracle_new
 
 
-越南测试环境远程桌面
+印尼测试环境
+地址：202.159.30.42:5005
+跳板：103.60.220.42:5005
+用户：msdadmin
+密码：msd123456
+
+
+
