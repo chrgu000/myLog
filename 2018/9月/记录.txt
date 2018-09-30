@@ -307,3 +307,19 @@
 2. wmis项目添加表单验证插件（jquery.validate 	网址：http://www.runoob.com/jquery/jquery-plugin-validate.html）
 3. 将印尼APP的findDropoffList和findCommonRemarkList去掉登录验证
 4. 学习js form ajax的用法（jquery.form.js 	地址：https://www.cnblogs.com/zhuxiaojie/p/4783939.html）
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+|		9月30日	周日
+----------------------------------------------------------------------------------------------------------------------------------------
+
+题记：
+放假前最后一天，坚持
+
+内容：
+1. 修改印尼客户APP的下单和查看订单列表的BUG（收件人和发件人的省市区字段的问题，以及收件人和发件人的电话问题）
+2. 学习session共享的问题，以及Redis设置值的有效期。writeTemplate.opsForHash().put(UasContants.REDIS_USER_SESSION_KEY+"_"+redisSessionKey,redisSessionKey, userSessionString); 
+ writeTemplate.expire(UasContants.REDIS_USER_SESSION_KEY+"_"+redisSessionKey, 1800L, TimeUnit.SECONDS);//设置redis中值的有效期
+（参考网址：https://blog.csdn.net/u013490585/article/details/70258470/）
+3. 学习网页cookie技术
+4. 学习Windows下，利用DOS命令杀死端口 （文件位置：文档/Dos命令杀死端口步骤.txt；	参考网址：https://blog.csdn.net/csdnones/article/details/50417451）
