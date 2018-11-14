@@ -56,3 +56,13 @@ psw：JETthailand2018
 ip:  119.28.86.136
 
 
+运维管理
+地址：61.144.244.100
+用户/密码：lichao/yunluchao2017!@#
+用户/密码：lichunquan/yunluquan2018!@#
+
+
+物料管理数据库
+用户：JMSDATA
+密码：oracle
+地址：80
