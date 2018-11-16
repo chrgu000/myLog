@@ -66,3 +66,9 @@ ip:  119.28.86.136
 用户：JMSDATA
 密码：oracle
 地址：80
+
+
+泰国E3测试
+660001
+msdadmin
+tgylm.net
