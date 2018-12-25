@@ -3,22 +3,17 @@
 用户：administrator
 密码：MSDmsd123
 
-
-svn账号密码
-用户：lidehuan
-密码：lidehuan
-
-
 越南订单接口
 SVN：https://192.168.1.37/svn/Java/Frame/projects/interface/yuenan/订单接口/yuenan-ifd-platform
-
 
 越南客户APP接口
 SVN：https://192.168.1.37/svn/Java/Frame/projects/interface/yuenan/新客户app/JandT_Customer_App
 
+越南E3正式环境
+账户：msdadmin
+密码：vnylm.net
 
-云路开发者技术文档
-http://developer.yl-scm.com:22222/yunlu-developer-document/
+
 
 
 印尼本地数据库
@@ -26,28 +21,29 @@ http://developer.yl-scm.com:22222/yunlu-developer-document/
 用户：yinnibendi
 密码：oracle
 
-
-云路标准库
-地址：80
-用户：ylpt
-密码：ylpt_oracle_new
-
-
 印尼测试环境
 地址：202.159.30.42:5005
 跳板：103.60.220.42:5005
 用户：msdadmin
 密码：msd123456
 
-越南E3正式环境
-账户：msdadmin
-密码：vnylm.net
+印尼E3
+密码：m.net
+
+
 
 
 泰国云服务器信息
 IP:150.109.181.38
 user：Administrator
 psw：JETthailand2018
+
+泰国E3测试
+660001
+msdadmin
+tgylm.net
+
+
 
 
 菲律宾云服务器信息
@@ -68,10 +64,8 @@ ip:  119.28.86.136
 地址：80
 
 
-泰国E3测试
-660001
-msdadmin
-tgylm.net
+物料原型
+https://19imaj.axshare.com
 
 
 
@@ -85,5 +79,17 @@ yl-scm.com
 新密码：a123123123
 
 
-物料原型
-https://19imaj.axshare.com
+云路开发者技术文档
+http://developer.yl-scm.com:22222/yunlu-developer-document/
+
+云路标准库
+地址：80
+用户：ylpt
+密码：ylpt_oracle_new
+
+
+svn账号密码
+用户：lidehuan
+密码：lidehuan
+
+
