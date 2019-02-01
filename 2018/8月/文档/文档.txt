@@ -43,6 +43,13 @@ psw：JETthailand2018
 msdadmin
 tgylm.net
 
+泰国客服系统在线文档
+测试环境：http://150.109.181.38:22221/thailand-ifd-web/document/callcenter/index.jsp
+
+泰国正式库
+用户： e3data
+密码： thailande3data
+
 
 
 
@@ -56,6 +63,7 @@ ip:  119.28.86.136
 地址：61.144.244.100
 用户/密码：lichao/yunluchao2017!@#
 用户/密码：lichunquan/yunluquan2018!@#
+用户/密码：wunianzu/yunluzu2015!@#
 
 
 物料管理数据库
@@ -91,5 +99,9 @@ http://developer.yl-scm.com:22222/yunlu-developer-document/
 svn账号密码
 用户：lidehuan
 密码：lidehuan
+
+
+查看e3web的表权限
+select 'grant insert,delete,update,select on '||object_name ||' to e3web;' from user_objects t where t.object_name like 'TAB_%' AND object_type='TABLE'
 
 
