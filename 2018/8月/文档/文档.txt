@@ -13,6 +13,10 @@ SVN：https://192.168.1.37/svn/Java/Frame/projects/interface/yuenan/新客户app/Jan
 账户：msdadmin
 密码：vnylm.net
 
+越南正式库
+账号：e3data
+密码：yuenane3data
+
 
 
 
@@ -74,6 +78,9 @@ ip:  119.28.86.136
 
 物料原型
 https://19imaj.axshare.com
+
+物料系统 开发
+地址：http://localhost:9598/#/homepage
 
 
 
