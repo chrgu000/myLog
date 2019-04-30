@@ -1,6 +1,6 @@
 /***************************    部署类   **********/
 --查看文件上下10行
-grep -C 10 'asdasjdas' 文件名
+grep -C 10 '00038JT1812460746' 文件名
 
 --回到文件最底位置
 shift + G
@@ -15,6 +15,8 @@ rm -f *
 解压tar.gz文件的命令是：
 tar  -zxvf   压缩文件名.tar.gz
 
+骚操作，目录下查找内容
+find . -mindepth 3 -maxdepth 3|grep '/logs/'|xargs -ti grep '19022106577QTNY' {}
 
 
 
@@ -26,3 +28,20 @@ chmod 777  *.sh
 
 --开放端口命令： 
 /sbin/iptables -I INPUT -p tcp --dport 8080 -j ACCEPT
+
+
+
+开防火墙：
+vi /etc/sysconfig/iptables
+
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
+
+修改完保存退出，重启网卡服务
+
+service iptables restart
+
+
+查看tomcat进程
+ps -ef |grep tomcat
+
+kill -9 5144

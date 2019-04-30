@@ -112,3 +112,13 @@ svn账号密码
 select 'grant insert,delete,update,select on '||object_name ||' to e3web;' from user_objects t where t.object_name like 'TAB_%' AND object_type='TABLE'
 
 
+开防火墙：
+vi /etc/sysconfig/iptables
+
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
+
+修改完保存退出，重启网卡服务
+
+service iptables restart
+
+
